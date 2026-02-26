@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admiral Banner Alineado</title>
+<title>Admiral Banner A y L Impactantes</title>
+
+<!-- Google Fonts para Montserrat -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', 'Poppins', 'Arial', sans-serif;
 }
 
 body{
@@ -27,13 +30,29 @@ body{
     text-align:center;
 }
 
-/* ADMIRAL */
+/* ADMIRAL con A y L sobresalientes arriba y abajo */
 .admiral{
     font-size: clamp(60px, 12vw, 180px);
-    font-weight:900;
+    font-weight: 800; /* extra-bold */
     letter-spacing:0.5vw;
     color:white;
     display: inline-block;
+}
+
+.admiral span:first-child,
+.admiral span:last-child
+{
+    font-size: 1.15em; 
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-0.05em); /* sobresale un poco arriba */
+}
+
+.admiral span:first-child::after,
+.admiral span:last-child::after {
+    content: '';
+    display: block;
+    height: 0.1em; /* añade sobresaliente por debajo */
 }
 
 /* BET animado */
@@ -44,7 +63,7 @@ body{
 .bet span{
     display:inline-block;
     font-size: clamp(40px, 8vw, 120px);
-    font-weight:bold;
+    font-weight: 800; /* extra-bold */
     padding: 1.5vh 3vw;
     margin:1vw;
     border-radius:1vw;
@@ -56,22 +75,21 @@ body{
 .bet span:nth-child(2){ animation-delay:0.15s; }
 .bet span:nth-child(3){ animation-delay:0.30s; }
 
-/* PROMOCIONES ajustado para coincidir márgenes */
+/* PROMOCIONES ajustado */
 .promo-container{
-    display:inline-block; /* igual que ADMIRAL */
+    display:inline-block;
     text-align:center;
     margin-top:3vh;
 }
 
 .promo{
-    font-weight:900;
+    font-weight: 800; /* extra-bold */
     color:white;
-    font-size: clamp(40px, 10vw, 140px); /* un poco más pequeña que ADMIRAL */
+    font-size: clamp(40px, 10vw, 140px);
     display:flex;
     justify-content:center;
 }
 
-/* Animación progresiva */
 .promo span{
     opacity:0;
     transform: translateY(20px);
@@ -102,7 +120,7 @@ body{
     }
     65%{
         opacity:1;
-        transform: translateY(0) scale(1.05); /* impacto leve */
+        transform: translateY(0) scale(1.05);
     }
     75%{
         opacity:1;
@@ -120,7 +138,9 @@ body{
 
 <div class="banner">
 
-    <div class="admiral">ADMIRAL</div>
+    <div class="admiral">
+        <span>A</span>DMIRA<span>L</span>
+    </div>
 
     <div class="bet">
         <span>B</span>
@@ -128,7 +148,6 @@ body{
         <span>T</span>
     </div>
 
-    <!-- Contenedor para alinear con ADMIRAL -->
     <div class="promo-container">
         <div class="promo">
             <span>PRO</span><span>MO</span><span>CIONES</span>
