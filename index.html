@@ -3,67 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admiral Banner A y L Impactantes</title>
+<title>Banner + Slideshow Integrado</title>
 
-<!-- Google Fonts para Montserrat -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
 <style>
-*{
+body, html{
     margin:0;
     padding:0;
-    box-sizing:border-box;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000814;
     font-family: 'Montserrat', 'Poppins', 'Arial', sans-serif;
 }
 
-body{
-    width:100vw;
-    height:100vh;
+/* Todos los slides ocupan pantalla completa y empiezan ocultos */
+.slide{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+}
+
+/* Secuencia: Banner 0-15s, Img1 15-30s, Img2 30-45s, Img3 45-60s, Img4 60-75s */
+.slide:nth-child(1){ animation: fade 75s infinite 0s; }  /* Banner */
+.slide:nth-child(2){ animation: fade 75s infinite 15s; } /* Imagen 1 */
+.slide:nth-child(3){ animation: fade 75s infinite 30s; } /* Imagen 2 */
+.slide:nth-child(4){ animation: fade 75s infinite 45s; } /* Imagen 3 */
+.slide:nth-child(5){ animation: fade 75s infinite 60s; } /* Imagen 4 */
+
+@keyframes fade{
+    0%,19.999%{ opacity:1; }
+    20%,100%{ opacity:0; }
+}
+
+/* Banner Animado */
+.banner{
+    width:100%;
+    height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
     background: radial-gradient(circle at center, #123a78 0%, #081f3f 60%, #000814 100%);
-    overflow:hidden;
-}
-
-.banner{
-    text-align:center;
 }
 
 /* ADMIRAL con A y L sobresalientes arriba y abajo */
 .admiral{
     font-size: clamp(60px, 12vw, 180px);
-    font-weight: 800; /* extra-bold */
+    font-weight: 800;
     letter-spacing:0.5vw;
     color:white;
     display: inline-block;
 }
-
 .admiral span:first-child,
 .admiral span:last-child
 {
-    font-size: 1.15em; 
+    font-size: 1.15em;
     display: inline-block;
     vertical-align: middle;
-    transform: translateY(-0.05em); /* sobresale un poco arriba */
-}
-
-.admiral span:first-child::after,
-.admiral span:last-child::after {
-    content: '';
-    display: block;
-    height: 0.1em; /* añade sobresaliente por debajo */
+    transform: translateY(-0.1em); /* sobresale arriba y abajo */
 }
 
 /* BET animado */
 .bet{
     margin-top:3vh;
 }
-
 .bet span{
     display:inline-block;
     font-size: clamp(40px, 8vw, 120px);
-    font-weight: 800; /* extra-bold */
+    font-weight: 800;
     padding: 1.5vh 3vw;
     margin:1vw;
     border-radius:1vw;
@@ -71,31 +84,27 @@ body{
     color:#0b2d5c;
     animation: bounce 1.2s infinite ease-in-out;
 }
-
 .bet span:nth-child(2){ animation-delay:0.15s; }
 .bet span:nth-child(3){ animation-delay:0.30s; }
 
-/* PROMOCIONES ajustado */
+/* PROMOS */
 .promo-container{
     display:inline-block;
     text-align:center;
     margin-top:3vh;
 }
-
 .promo{
-    font-weight: 800; /* extra-bold */
+    font-weight:800;
     color:white;
     font-size: clamp(40px, 10vw, 140px);
     display:flex;
     justify-content:center;
 }
-
 .promo span{
     opacity:0;
     transform: translateY(20px);
     animation: build 4s infinite;
 }
-
 .promo span:nth-child(1){ animation-delay:0s; }
 .promo span:nth-child(2){ animation-delay:0.8s; }
 .promo span:nth-child(3){ animation-delay:1.6s; }
@@ -104,57 +113,42 @@ body{
     0%,100%{ transform: translateY(0); }
     50%{ transform: translateY(-20px); }
 }
-
 @keyframes build{
-    0%{
-        opacity:0;
-        transform: translateY(20px) scale(1);
-    }
-    15%{
-        opacity:1;
-        transform: translateY(0) scale(1);
-    }
-    55%{
-        opacity:1;
-        transform: translateY(0) scale(1);
-    }
-    65%{
-        opacity:1;
-        transform: translateY(0) scale(1.05);
-    }
-    75%{
-        opacity:1;
-        transform: translateY(0) scale(1);
-    }
-    100%{
-        opacity:0;
-        transform: translateY(-10px) scale(1);
-    }
+    0%{ opacity:0; transform: translateY(20px) scale(1); }
+    15%{ opacity:1; transform: translateY(0) scale(1); }
+    55%{ opacity:1; transform: translateY(0) scale(1); }
+    65%{ opacity:1; transform: translateY(0) scale(1.05); }
+    75%{ opacity:1; transform: translateY(0) scale(1); }
+    100%{ opacity:0; transform: translateY(-10px) scale(1); }
+}
+
+/* Estilo para imágenes */
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 </style>
 </head>
 
 <body>
 
-<div class="banner">
-
-    <div class="admiral">
-        <span>A</span>DMIRA<span>L</span>
-    </div>
-
+<!-- Banner Animado -->
+<div class="slide banner">
+    <div class="admiral"><span>A</span>DMIRA<span>L</span></div>
     <div class="bet">
-        <span>B</span>
-        <span>E</span>
-        <span>T</span>
+        <span>B</span><span>E</span><span>T</span>
     </div>
-
     <div class="promo-container">
-        <div class="promo">
-            <span>PRO</span><span>MO</span><span>CIONES</span>
-        </div>
+        <div class="promo"><span>PRO</span><span>MO</span><span>S</span></div>
     </div>
-
 </div>
+
+<!-- Imágenes -->
+<div class="slide"><img src="image1.jpg" alt="Imagen 1"></div>
+<div class="slide"><img src="image2.jpg" alt="Imagen 2"></div>
+<div class="slide"><img src="image3.jpg" alt="Imagen 3"></div>
+<div class="slide"><img src="image4.jpg" alt="Imagen 4"></div>
 
 </body>
 </html>
