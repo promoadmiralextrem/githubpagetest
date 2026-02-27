@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banner + Slideshow Integrado</title>
+<title>Banner + Slideshow Optimizado</title>
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@ body, html{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#000814;
+    background:#081f3f; /* sólido más ligero que radial-gradient */
     font-family: 'Montserrat', 'Poppins', 'Arial', sans-serif;
 }
 
@@ -30,11 +30,11 @@ body, html{
 }
 
 /* Secuencia: Banner 0-15s, Img1 15-30s, Img2 30-45s, Img3 45-60s, Img4 60-75s */
-.slide:nth-child(1){ animation: fade 75s infinite 0s; }  /* Banner */
-.slide:nth-child(2){ animation: fade 75s infinite 15s; } /* Imagen 1 */
-.slide:nth-child(3){ animation: fade 75s infinite 30s; } /* Imagen 2 */
-.slide:nth-child(4){ animation: fade 75s infinite 45s; } /* Imagen 3 */
-.slide:nth-child(5){ animation: fade 75s infinite 60s; } /* Imagen 4 */
+.slide:nth-child(1){ animation: fade 75s infinite 0s; }  
+.slide:nth-child(2){ animation: fade 75s infinite 15s; } 
+.slide:nth-child(3){ animation: fade 75s infinite 30s; } 
+.slide:nth-child(4){ animation: fade 75s infinite 45s; } 
+.slide:nth-child(5){ animation: fade 75s infinite 60s; } 
 
 @keyframes fade{
     0%,19.999%{ opacity:1; }
@@ -49,37 +49,36 @@ body, html{
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    background: radial-gradient(circle at center, #123a78 0%, #081f3f 60%, #000814 100%);
+    background:#081f3f;
 }
 
-/* ADMIRAL con A y L sobresalientes arriba y abajo */
+/* ADMIRAL con A y L sobresalientes */
 .admiral{
-    font-size: clamp(60px, 12vw, 180px);
-    font-weight: 800;
+    font-size:12vw;
+    font-weight:800;
     letter-spacing:0.5vw;
     color:white;
-    display: inline-block;
+    display:inline-block;
 }
 .admiral span:first-child,
-.admiral span:last-child
-{
-    font-size: 1.15em;
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateY(-0.1em); /* sobresale arriba y abajo */
+.admiral span:last-child{
+    font-size:1.15em;
+    display:inline-block;
+    vertical-align:middle;
+    transform: translateY(-0.1em);
 }
 
 /* BET animado */
 .bet{
-    margin-top:3vh;
+    margin-top:2vh;
 }
 .bet span{
     display:inline-block;
-    font-size: clamp(40px, 8vw, 120px);
-    font-weight: 800;
-    padding: 1.5vh 3vw;
-    margin:1vw;
-    border-radius:1vw;
+    font-size:6vw;
+    font-weight:800;
+    padding:1vh 2vw;
+    margin:0.5vw;
+    border-radius:0.5vw;
     background:#ffd100;
     color:#0b2d5c;
     animation: bounce 1.2s infinite ease-in-out;
@@ -87,39 +86,49 @@ body, html{
 .bet span:nth-child(2){ animation-delay:0.15s; }
 .bet span:nth-child(3){ animation-delay:0.30s; }
 
-/* PROMOS */
+@keyframes bounce{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-10px); } /* movimiento más ligero */
+}
+
+/* PROMOS animado */
 .promo-container{
     display:inline-block;
     text-align:center;
-    margin-top:3vh;
+    margin-top:2vh;
 }
 .promo{
     font-weight:800;
     color:white;
-    font-size: clamp(40px, 10vw, 140px);
+    font-size:12vw;
     display:flex;
     justify-content:center;
+    gap:0.2em;
 }
 .promo span{
     opacity:0;
-    transform: translateY(20px);
+    display:inline-block;
+    transform: translateY(10px);
     animation: build 4s infinite;
 }
-.promo span:nth-child(1){ animation-delay:0s; }
-.promo span:nth-child(2){ animation-delay:0.8s; }
-.promo span:nth-child(3){ animation-delay:1.6s; }
 
-@keyframes bounce{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-20px); }
+/* P y S sobresalientes */
+.promo span:first-child span:first-child,
+.promo span:last-child span:last-child{
+    transform: translateY(-0.1em);
 }
+
+/* Animación de aparición: PRO → MOS */
+.promo span:nth-child(1){ animation-delay:0s; } 
+.promo span:nth-child(2){ animation-delay:2s; }
+
 @keyframes build{
-    0%{ opacity:0; transform: translateY(20px) scale(1); }
-    15%{ opacity:1; transform: translateY(0) scale(1); }
-    55%{ opacity:1; transform: translateY(0) scale(1); }
-    65%{ opacity:1; transform: translateY(0) scale(1.05); }
-    75%{ opacity:1; transform: translateY(0) scale(1); }
-    100%{ opacity:0; transform: translateY(-10px) scale(1); }
+    0%{ opacity:0; transform: translateY(10px); }
+    15%{ opacity:1; transform: translateY(0); }
+    55%{ opacity:1; transform: translateY(0); }
+    65%{ opacity:1; transform: translateY(0) scale(1.02); } /* ligero scale solo */
+    75%{ opacity:1; transform: translateY(0); }
+    100%{ opacity:0; transform: translateY(-5px); }
 }
 
 /* Estilo para imágenes */
@@ -140,7 +149,10 @@ body, html{
         <span>B</span><span>E</span><span>T</span>
     </div>
     <div class="promo-container">
-        <div class="promo"><span>PRO</span><span>MO</span><span>S</span></div>
+        <div class="promo">
+            <span><span>P</span>RO</span>
+            <span><span>M</span>OS</span>
+        </div>
     </div>
 </div>
 
