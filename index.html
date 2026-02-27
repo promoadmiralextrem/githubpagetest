@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Banner + Slideshow Optimizado</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
 <style>
@@ -15,123 +14,78 @@ body, html{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#081f3f; /* sólido más ligero que radial-gradient */
+    background:#000814;
     font-family: 'Montserrat', 'Poppins', 'Arial', sans-serif;
 }
 
-/* Todos los slides ocupan pantalla completa y empiezan ocultos */
+/* Slides ocupan pantalla completa */
 .slide{
     position:absolute;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    opacity:0;
+    display:none; /* oculto por defecto */
 }
-
-/* Secuencia: Banner 0-15s, Img1 15-30s, Img2 30-45s, Img3 45-60s, Img4 60-75s */
-.slide:nth-child(1){ animation: fade 75s infinite 0s; }  
-.slide:nth-child(2){ animation: fade 75s infinite 15s; } 
-.slide:nth-child(3){ animation: fade 75s infinite 30s; } 
-.slide:nth-child(4){ animation: fade 75s infinite 45s; } 
-.slide:nth-child(5){ animation: fade 75s infinite 60s; } 
-
-@keyframes fade{
-    0%,19.999%{ opacity:1; }
-    20%,100%{ opacity:0; }
-}
-
-/* Banner Animado */
-.banner{
-    width:100%;
-    height:100%;
-    display:flex;
+.slide.active{
+    display:flex; /* solo el slide activo se muestra */
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    background:#081f3f;
 }
 
-/* ADMIRAL con A y L sobresalientes */
+/* Banner animado */
+.banner{
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle at center, #123a78 0%, #081f3f 60%, #000814 100%);
+    text-align:center;
+}
+
+/* ADMIRAL */
 .admiral{
-    font-size:12vw;
-    font-weight:800;
+    font-size: clamp(60px, 12vw, 180px);
+    font-weight: 800;
     letter-spacing:0.5vw;
     color:white;
-    display:inline-block;
-}
-.admiral span:first-child,
-.admiral span:last-child{
-    font-size:1.15em;
-    display:inline-block;
-    vertical-align:middle;
-    transform: translateY(-0.1em);
+    margin-bottom:2vh;
 }
 
-/* BET animado */
+/* BET animado por palabra, no por letra */
 .bet{
-    margin-top:2vh;
-}
-.bet span{
-    display:inline-block;
-    font-size:6vw;
+    font-size: clamp(40px, 8vw, 120px);
     font-weight:800;
-    padding:1vh 2vw;
-    margin:0.5vw;
-    border-radius:0.5vw;
+    padding: 1.5vh 3vw;
+    border-radius:1vw;
     background:#ffd100;
     color:#0b2d5c;
-    animation: bounce 1.2s infinite ease-in-out;
-}
-.bet span:nth-child(2){ animation-delay:0.15s; }
-.bet span:nth-child(3){ animation-delay:0.30s; }
-
-@keyframes bounce{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-10px); } /* movimiento más ligero */
+    animation: bounce 1.5s infinite ease-in-out;
+    will-change: transform;
+    margin-bottom:3vh;
 }
 
-/* PROMOS animado */
-.promo-container{
-    display:inline-block;
-    text-align:center;
-    margin-top:2vh;
-}
+/* PROMO animado por palabra */
 .promo{
     font-weight:800;
     color:white;
-    font-size:12vw;
-    display:flex;
-    justify-content:center;
-    gap:0.2em;
-}
-.promo span{
-    opacity:0;
+    font-size: clamp(60px, 12vw, 180px);
     display:inline-block;
-    transform: translateY(10px);
-    animation: build 4s infinite;
+    animation: fadeInOut 6s infinite;
+    will-change: opacity, transform;
 }
 
-/* P y S sobresalientes */
-.promo span:first-child span:first-child,
-.promo span:last-child span:last-child{
-    transform: translateY(-0.1em);
+/* Animaciones simplificadas */
+@keyframes bounce{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-15px); }
+}
+@keyframes fadeInOut{
+    0%,20%{ opacity:0; transform: translateY(20px); }
+    25%,75%{ opacity:1; transform: translateY(0); }
+    80%,100%{ opacity:0; transform: translateY(-10px); }
 }
 
-/* Animación de aparición: PRO → MOS */
-.promo span:nth-child(1){ animation-delay:0s; } 
-.promo span:nth-child(2){ animation-delay:2s; }
-
-@keyframes build{
-    0%{ opacity:0; transform: translateY(10px); }
-    15%{ opacity:1; transform: translateY(0); }
-    55%{ opacity:1; transform: translateY(0); }
-    65%{ opacity:1; transform: translateY(0) scale(1.02); } /* ligero scale solo */
-    75%{ opacity:1; transform: translateY(0); }
-    100%{ opacity:0; transform: translateY(-5px); }
-}
-
-/* Estilo para imágenes */
+/* Imágenes */
 .slide img{
     width:100%;
     height:100%;
@@ -142,18 +96,11 @@ body, html{
 
 <body>
 
-<!-- Banner Animado -->
-<div class="slide banner">
-    <div class="admiral"><span>A</span>DMIRA<span>L</span></div>
-    <div class="bet">
-        <span>B</span><span>E</span><span>T</span>
-    </div>
-    <div class="promo-container">
-        <div class="promo">
-            <span><span>P</span>RO</span>
-            <span><span>M</span>OS</span>
-        </div>
-    </div>
+<!-- Banner -->
+<div class="slide banner active">
+    <div class="admiral">ADMIRAL</div>
+    <div class="bet">BET</div>
+    <div class="promo">PROMOS</div>
 </div>
 
 <!-- Imágenes -->
@@ -161,6 +108,21 @@ body, html{
 <div class="slide"><img src="image2.jpg" alt="Imagen 2"></div>
 <div class="slide"><img src="image3.jpg" alt="Imagen 3"></div>
 <div class="slide"><img src="image4.jpg" alt="Imagen 4"></div>
+
+<script>
+// Slideshow simple: solo un slide activo a la vez
+let slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showNextSlide(){
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+}
+
+// Cambiar slide cada 15 segundos
+setInterval(showNextSlide, 15000);
+</script>
 
 </body>
 </html>
