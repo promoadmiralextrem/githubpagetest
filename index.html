@@ -51,40 +51,14 @@
     </style>
 </head>
 <body>
-    <!-- Images 
+    <!-- Images -->
     <img class="slide" src="1.jpg" alt="Image 1">
     <img class="slide" src="2.jpg" alt="Image 2">
     <img class="slide" src="3.jpg" alt="Image 3">
-    <img class="slide" src="4.jpg" alt="Image 4"> -->
-<script>
-    /* Cargar imágenes automáticamente */
-let i = 1;
+    <img class="slide" src="4.jpg" alt="Image 4">
+	<img class="slide" src="5.jpg" alt="Image 5">
+	<img class="slide" src="6.jpg" alt="Image 6">
 
-function cargarImagen(){
-    const img = new Image();
-    /*img.src = i + ".jpg";*/
-    img.src = i + ".jpg?v=" + Date.now();
-
-    img.onload = function(){
-
-        const div = document.createElement("div");
-        div.className = "slide";
-
-        const image = document.createElement("img");
-        image.src = img.src;
-
-        div.appendChild(image);
-        slidesContainer.appendChild(div);
-
-        slides = document.querySelectorAll(".slide");
-
-        i++;
-        cargarImagen();
-    }
-}
-
-cargarImagen();
-</script>
 </body>
 </html>
 
