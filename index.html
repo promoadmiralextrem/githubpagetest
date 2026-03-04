@@ -1,65 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Permissions-Policy" content="interest-cohort=(), user-id=()" />
-    <title>Image Slideshow</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-        .slide {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            opacity: 0; /* Start with all slides hidden */
-        }
-        .slide:nth-child(1) {
-            animation: fade 75s infinite 0s; /* Show the first slide */
-        }
-        .slide:nth-child(2) {
-            animation: fade 75s infinite 15s; /* Show the second slide after 5 seconds */
-        }
-        .slide:nth-child(3) {
-            animation: fade 75s infinite 30s; /* Show the third slide after 10 seconds */
-        }
-        .slide:nth-child(4) {
-            animation: fade 75s infinite 45s; /* Show the fourth slide after 15 seconds */
-        }
-		.slide:nth-child(5) {
-            animation: fade 75s infinite 60s; /* Show the fourth slide after 20 seconds */
-        }
-		.slide:nth-child(6) {
-            animation: fade 75s infinite 75s; /* Show the fourth slide after 25 seconds */
-        }
-        @keyframes fade {
-            0%, 16% {
-                opacity: 1; /* Start with the first slide visible */
-            }
-            20%, 100% {
-                opacity: 0;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrusel de imágenes</title>
+
+<style>
+
+body,html{
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+overflow:hidden;
+background:#0b2d5c;
+}
+
+/* slides */
+
+.slide{
+position:absolute;
+inset:0;
+width:100vw;
+height:100vh;
+opacity:0;
+
+background-position:center;
+background-repeat:no-repeat;
+background-size:contain;
+}
+
+.active{
+opacity:1;
+transition:opacity 1s;
+}
+
+</style>
 </head>
+
 <body>
-    <!-- Images -->
-    <img class="slide" src="1.jpg" alt="Image 1">
-    <img class="slide" src="2.jpg" alt="Image 2">
-    <img class="slide" src="3.jpg" alt="Image 3">
-    <img class="slide" src="4.jpg" alt="Image 4">
-	<img class="slide" src="5.jpg" alt="Image 5">
-	<img class="slide" src="6.jpg" alt="Image 6">
+
+<div id="slides"></div>
+
+<script>
+
+const slidesContainer=document.getElementById("slides")
+let slides=document.querySelectorAll(".slide")
+
+let index=0
+const tiempo=15000
+
+function cambiarSlide(){
+
+slides[index].classList.remove("active")
+index=(index+1)%slides.length
+slides[index].classList.add("active")
+
+}
+
+setInterval(cambiarSlide,tiempo)
+
+/* cargar imágenes automáticamente */
+
+let i=1
+const limite=100
+
+function cargarImagen(){
+
+const img=new Image()
+img.src=i+".jpg"
+
+img.onload=function(){
+
+const div=document.createElement("div")
+div.className="slide"
+div.style.backgroundImage="url('"+img.src+"')"
+
+slidesContainer.appendChild(div)
+
+slides=document.querySelectorAll(".slide")
+
+if(slides.length===1){
+slides[0].classList.add("active")
+}
+
+i++
+cargarImagen()
+
+}
+
+img.onerror=function(){
+
+i++
+
+if(i<=limite){
+cargarImagen()
+}
+
+}
+
+}
+
+cargarImagen()
+
+</script>
 
 </body>
 </html>
-
-
-
-
-
