@@ -62,7 +62,7 @@ let cargadas = 0
 for(let i = 1; i <= limite; i++){
 
 const img = new Image()
-img.src = i + ".jpg"
+img.src = i + ".jpg?v=" + Date.now();
 img.className = "slide"
 
 img.onload = function(){
@@ -107,4 +107,5 @@ preloadImagenes(iniciarCarrusel)
 
 </body>
 </html>
+
 
